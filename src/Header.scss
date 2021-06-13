@@ -1,0 +1,14 @@
+$primary-color: rgb(56, 56, 56);
+$font-color: white;
+
+.header {
+  height: 17vh;
+  background-color: $primary-color;
+  color: $font-color;
+}
+
+#headerTitle {
+  padding-top: 2vh;
+  font-size: 75px;
+  text-shadow: 2px 2px 5px rgb(202, 202, 202);
+}
