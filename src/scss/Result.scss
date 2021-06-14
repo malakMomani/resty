@@ -1,0 +1,24 @@
+#result{
+  width: 60%;
+  height: max-content;
+  border:2px groove black;
+  background-color: rgba(206, 206, 206, 0.904);
+  margin-left: 20%;
+  text-align: center;
+  display: grid;
+  grid-auto-flow: column;
+  justify-items: left;
+
+}
+#result p {
+  margin-top: 2vh ;
+  margin-left: 3vw;
+  font-size: larger;
+  font-weight: bold;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+textarea {
+  height: 150px;
+  width: 400px;
+}

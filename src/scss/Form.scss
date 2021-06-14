@@ -1,0 +1,48 @@
+$border : #ccc;
+$button : #11abb6;
+
+#formDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px groove $border;
+  height: 30%;
+  width: 30%;
+  margin-left: 35%;
+  background-color: rgba(177, 231, 213, 0.664);
+}
+
+label {
+  padding-top: 14px;
+  padding-bottom: 14px;
+  display: inline-block;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-weight: bold;
+}
+input[type=text]{
+  width: 200%;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid $border;
+  border-radius: 4px;
+  resize: vertical;
+  margin-left: -70px;
+}
+
+input[type=submit] {
+  background-color: $button;
+  color: white;
+  padding: 12px 20px;
+  border: 2px solid $border;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #ccc;
+}
+#radioBtns {
+display: grid;
+grid-auto-flow: column;
+}
+
