@@ -9,6 +9,6 @@ test('Return a response from given URL' ,async ()=>{
   fireEvent.click(screen.getByDisplayValue('GO!'))
 
   // Wait for page to update with query text
-  const items = await screen.findAllByText(/root/);
+  const items = await screen.findAllByText('root');
   expect(items).toBeDefined();
 });
