@@ -58,11 +58,13 @@ class Form extends React.Component {
       });
     }
 
-    console.log("raw >>>>>>>>>>>>>>>>>>>>: ", raw)
     let data = await raw.json();
-    console.log("data >>>>>>>>>>>>>>> : ", data);
     const count = data.count;
-    this.props.handler(data, count);
+    const operation = {
+      method:this.state.method,
+      url:this.state.url
+    }
+    this.props.handler(data, count , operation);
   }
 
   render() {
