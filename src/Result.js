@@ -5,7 +5,6 @@ import './scss/Result.scss';
 class Result extends React.Component {
 
   render(){
-    console.log('props ---------', this.props);
     return (
       <section id="result">
         <ReactJson src={this.props.results} />

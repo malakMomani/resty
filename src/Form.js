@@ -8,61 +8,77 @@ class Form extends React.Component {
     this.state = {
       method: 'get',
       url: '',
-      body: ''
+      body: '',
     };
   }
 
   handleUrlChange = e => {
     const url = e.target.value
-    this.setState({ url });
-    console.log(this.state);
+    this.props.handleUrl(url)
   }
 
   handleMethodChange = e => {
+    console.log(e.target.value)
     const method = e.target.value
-    this.setState({ method });
-    console.log(this.state);
+    this.props.handleMethod(method);
+
 
   }
 
   handleBodyChange = e => {
     const body = e.target.value
-    this.setState({ body });
-    console.log(this.state);
+    this.props.handleBody(body)
 
   }
 
   handleBtnSubmit = async (e) => {
     e.preventDefault();
-
     let raw;
-    if (this.state.method === 'get') {
-      console.log('--------get--------')
-      raw = await fetch(this.state.url, {
-        method: this.state.method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-      });
-    }
-    else {
-      raw = await fetch(this.state.url, {
-        method: this.state.method,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-        body: JSON.stringify(this.state.body),
+    let counter = this.props.counter;
+    this.props.toggleLoader();
+    try {
 
-      });
+      if (this.props.method === 'get') {
+        raw = await fetch(this.props.url, {
+          method: this.props.method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+        });
+      }
+      else {
+        raw = await fetch(this.props.url, {
+          method: this.props.method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+          body: JSON.stringify(this.props.body),
+
+        });
+
+      }
+      let data = await raw.json();
+      const count = data.count;
+      // save the method and the url in the localstorage
+      // that's mean there's no error in the fetching
+      const item = {
+        url: this.props.url,
+        method: this.props.method
+      }
+      localStorage.setItem(`operation ${counter}`, JSON.stringify(item));
+      this.props.handler(data, count, counter + 1);
+      this.props.toggleLoader(true);
+
+    } catch (error) {
+      // render the error inside the result component
+      console.log('------------error area', error.message)
+      this.props.handler(error, 0, counter);
+      this.props.toggleLoader();
     }
 
-    console.log("raw >>>>>>>>>>>>>>>>>>>>: ", raw)
-    let data = await raw.json();
-    console.log("data >>>>>>>>>>>>>>> : ", data);
-    const count = data.count;
-    this.props.handler(data, count);
+
   }
 
   render() {
@@ -75,7 +91,7 @@ class Form extends React.Component {
             </label><hr />
             <div id="radioBtns" >
               <label htmlFor="get">
-                <input type="radio" id="get" name="rest" value="get" onChange={this.handleMethodChange} checked="checked" />
+                <input type="radio" id="get" name="rest" value="get" onChange={this.handleMethodChange}/>
                 GET</label>
               <label htmlFor="post">
                 <input type="radio" id="post" name="rest" value="post" onChange={this.handleMethodChange} />
