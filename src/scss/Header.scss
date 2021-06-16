@@ -12,3 +12,21 @@ $font-color: white;
   font-size: 75px;
   text-shadow: 2px 2px 5px rgb(202, 202, 202);
 }
+
+#navLinks{
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+  list-style-type: none;
+
+}
+
+#navLinks li{
+  margin-left: 100px;
+}
+.link{
+  text-shadow:2px 2px 5px rgb(202, 202, 202);
+  text-decoration: none;
+  color: rgb(199, 199, 199);
+  font-size: larger;
+}

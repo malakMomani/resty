@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './css/App.css';
 import Header from './Header';
 import Footer from './Footer';
@@ -7,6 +8,7 @@ import Result from './Result';
 import History from './History.js'
 import If from './If';
 import Loader from './Loader';
+import Help from './Help';
 
 class App extends React.Component {
   constructor(props) {
@@ -40,7 +42,7 @@ class App extends React.Component {
   }
 
   historyHandler = (results, url, method, count) => {
-    this.setState({ results ,url, method , count })
+    this.setState({ results, url, method, count })
   }
 
   toggleLoader = () => {
@@ -50,30 +52,54 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <Header />
-        <Form handler={this.handleForm}
-          counter={this.state.counter}
-          url={this.state.url}
-          method={this.state.method}
-          handleUrl={this.handleUrl}
-          handleMethod={this.handleMethod}
-          handleBody={this.handleBody}
-          toggleLoader={this.toggleLoader}
-        />
-        <If condition={this.state.flag}>
-          <Loader />
-        </If>
+      <BrowserRouter>
+        <div className="App">
+          <Header />
+          <section id="flex">
+            <Switch>
+              <Route exact path="/">
+                <Form handler={this.handleForm}
+                  counter={this.state.counter}
+                  url={this.state.url}
+                  method={this.state.method}
+                  handleUrl={this.handleUrl}
+                  handleMethod={this.handleMethod}
+                  handleBody={this.handleBody}
+                  toggleLoader={this.toggleLoader}
+                />
+                <If condition={this.state.flag}>
+                  <Loader />
+                </If>
+                <If condition={this.state.results}>
+                  <Result results={this.state.results} />
+                </If>
+              </Route>
 
-        <History historyHandler={this.historyHandler}  
-                 toggleLoader={this.toggleLoader}
-                 />
+              <Route exact path="/history">
+                <History historyHandler={this.historyHandler}
+                  toggleLoader={this.toggleLoader}
+                />
+                <If condition={this.state.flag}>
+                  <Loader />
+                </If>
+                <If condition={this.state.results}>
+                  <Result results={this.state.results} />
+                </If>
+              </Route>
 
-        <If condition={this.state.results}>
-            <Result results={this.state.results} />
-        </If>
-        <Footer />
-      </div>
+              <Route exact path="/help">
+                <Help></Help>
+              </Route>
+            </Switch>
+
+
+          </section>
+
+
+          <Footer />
+        </div>
+      </BrowserRouter>
+
     )
   }
 }

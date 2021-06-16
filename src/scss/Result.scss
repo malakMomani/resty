@@ -1,9 +1,9 @@
 #result{
-  width: 60%;
+  width: max-content;
   height: max-content;
   border:2px groove black;
   background-color: rgba(206, 206, 206, 0.904);
-  margin-left: 20%;
+  margin-left: 10%;
   text-align: center;
   display: grid;
   grid-auto-flow: column;
